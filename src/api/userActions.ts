@@ -1,4 +1,5 @@
 import axiosInstance from './axiosInstance';
+import axios from 'axios';
 import { LoginCredentials, RegisterCredentials, IUser } from '../types';
 import { API_ENDPOINTS } from '../config/api';
 
@@ -42,8 +43,18 @@ export const userActions = {
 
   register: async (credentials: RegisterCredentials): Promise<IUser> => {
     try {
-      const response = await axiosInstance.post(API_ENDPOINTS.REGISTER, credentials);
+      const registerUrl = API_ENDPOINTS.REGISTER.replace('/api/', '/');
+      console.log('Register request URL:', registerUrl);
+      console.log('Register request data:', credentials);
+      
+      const response = await axiosInstance.post(registerUrl, {
+        username: credentials.username,
+        password: credentials.password
+      });
+      console.log('Register response:', response);
+      
       const { token, user } = response.data;
+      console.log('Parsed response:', { token, user });
       
       if (token) {
         localStorage.setItem('token', token);
@@ -53,6 +64,10 @@ export const userActions = {
       return user;
     } catch (error) {
       console.error('Register error:', error);
+      if (axios.isAxiosError(error) && error.response) {
+        console.error('Error response:', error.response.data);
+        console.error('Error status:', error.response.status);
+      }
       throw error;
     }
   },

@@ -4,11 +4,10 @@ import { createBrowserHistory } from 'history';
 export const history = createBrowserHistory();
 
 const axiosInstance = axios.create({
-  baseURL: '',
+  baseURL: 'http://ec2-13-49-67-34.eu-north-1.compute.amazonaws.com',
   timeout: 10000,
   headers: {
     'Content-Type': 'application/json',
-    'Accept': 'application/json'
   }
 });
 
