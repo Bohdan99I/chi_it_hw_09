@@ -2,7 +2,7 @@
   "name": "museum-app",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://ec2-13-49-67-34.eu-north-1.compute.amazonaws.com",
+  "proxy": "http://ec2-13-49-67-34.eu-north-1.compute.amazonaws.com/api",
   "dependencies": {
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",

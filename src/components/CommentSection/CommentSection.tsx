@@ -59,10 +59,12 @@ export const CommentSection: React.FC<CommentSectionProps> = ({ postId }) => {
 
   const handleEditComment = async (commentId: number, content: string) => {
     try {
-      await exhibitActions.updateComment(postId, commentId, content);
-      setComments(comments.map(comment =>
-        comment.id === commentId ? { ...comment, content } : comment
-      ));
+      const commentToUpdate = comments.find(comment => comment.id === commentId);
+      if (!commentToUpdate) return;
+
+      await exhibitActions.deleteComment(postId, commentId);
+      await exhibitActions.addComment(postId, content);
+      await fetchComments(); // Оновлюємо список коментарів після змін
     } catch (error) {
       console.error('Failed to update comment:', error);
       setError('Failed to update comment');

@@ -73,7 +73,11 @@ export const CommentStripe: React.FC<CommentStripeProps> = ({ postId }) => {
   const handleEditComment = async (commentId: number, content: string) => {
     try {
       setLoading(true);
-      await commentActions.updateComment(postId, commentId, content);
+      const commentToUpdate = comments.find(comment => comment.id === commentId);
+      if (!commentToUpdate) return;
+
+      await commentActions.deleteComment(postId, commentId);
+      await commentActions.createComment(postId, content);
       await fetchComments();
       setError(null);
     } catch (error) {

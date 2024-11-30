@@ -1,6 +1,6 @@
 import { io, Socket } from 'socket.io-client';
 
-const SOCKET_SERVER_URL = 'http://127.0.0.1:3000/notifications';
+const SOCKET_SERVER_URL = 'http://ec2-13-49-67-34.eu-north-1.compute.amazonaws.com/notifications';
 
 class SocketService {
   private socket: Socket | null = null;
