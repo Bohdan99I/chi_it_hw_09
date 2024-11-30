@@ -4,7 +4,7 @@ import { createBrowserHistory } from 'history';
 export const history = createBrowserHistory();
 
 const axiosInstance = axios.create({
-  baseURL: '/api',
+  baseURL: '',
   timeout: 10000,
   headers: {
     'Content-Type': 'application/json',
